@@ -94,3 +94,9 @@ kombinerar flera funktioner i en app och...
 ## Sammanfattning 
 
 > Ökade matpriser och ett växande fokus på hållbarhet har skapat ett behov av smartare matplanering. Trots att användare  söker lösningar, saknas en integrerad tjänst som kopplar samman ingredienser i hemmet med recept och aktuella erbjudanden. Detta skapar en möjlighet för en app som minskar matsvinn, sparar pengar och förenklar vardagen.
+
+---
+
+## Länk till vercel
+
+https://kunskapskontroll2.vercel.app
