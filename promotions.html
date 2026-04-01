@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Erbjudanden</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">SmartMat</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Hem</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="recipe.html">Recept</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="promotions.html">Erbjudanden</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <img
+      src="https://images.unsplash.com/photo-1542838132-92c53300491e"
+      class="img-fluid w-100 mb-3"
+      style="height: 400px; object-fit: cover;"
+      alt="Mat erbjudanden"
+    />
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col text-center">
+          <h1 class="">Erbjudanden</h1>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div id="filters" class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label for="storeFilter" class="form-label">Butik</label>
+            <select id="storeFilter" class="form-select">
+              <option value="">Alla butiker</option>
+              <option value="coop">Coop</option>
+              <option value="ica">ICA</option>
+              <option value="willys">Willys</option>
+              <option value="lidl">Lidl</option>
+              <option value="hemköp">Hemköp</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label for="categoryFilter" class="form-label">Kategori</label>
+            <select id="categoryFilter" class="form-select">
+              <option value="">Alla kategorier</option>
+              <option value="mejeri">Mejeri</option>
+              <option value="kött">Kött</option>
+              <option value="fisk">Fisk & Skaldjur</option>
+              <option value="frukt">Frukt</option>
+              <option value="grönsaker">Grönsaker</option>
+              <option value="frys">Frysvaror</option>
+              <option value="bröd">Bröd & Bageri</option>
+              <option value="dryck">Dryck</option>
+              <option value="skafferi">Skafferi</option>
+              <option value="snacks">Snacks & Godis</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div id="dealList">
+          <!-- Här kommer erbjudandena att visas dynamiskt via JavaScript -->
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md-3 mb-3">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Mjölk</h5>
+              <p class="card-text text-muted">ICA</p>
+              <span class="badge bg-success">12 kr</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Ost</h5>
+              <p class="card-text text-muted">Coop</p>
+              <span class="badge bg-success">25 kr</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Tomat</h5>
+              <p class="card-text text-muted">ICA</p>
+              <span class="badge bg-success">15 kr</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Broccoli</h5>
+              <p class="card-text text-muted">Lidl</p>
+              <span class="badge bg-success">10 kr</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
