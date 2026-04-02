@@ -1,0 +1,8 @@
+.hero-img {
+    border-radius: 12px;
+    box-shadow: 0 4px 24px var(--text-faded);
+    width: 100%;
+    object-fit: cover;
+    max-height: 420px;
+}
+ 
