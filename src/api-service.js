@@ -81,3 +81,34 @@ export async function fetchPromotions(id) {
         const data = await response.json();
         return data;
     }
+
+    // Fetches product info (name, brand, description, image) from promotion_item_info table.
+export async function fetchProductInfo(promotionItemInfoId) {
+    const TABLE_VIEW_URL = 'promotion_item_info';
+    let url = `${BASE_URL}${TABLE_VIEW_URL}?apikey=${API_KEY}`;
+
+    if (promotionItemInfoId) {
+        url += `&id=eq.${promotionItemInfoId}`;
+    }
+
+    console.log(`Fetching product info with URL: ${url}`);
+    let response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    return await response.json();
+}
+
+
+// Fetches nutrition data for a product from the nutrition table.
+export async function fetchNutrition(promotionItemInfoId) {
+    const TABLE_VIEW_URL = 'nutrition';
+    let url = `${BASE_URL}${TABLE_VIEW_URL}?apikey=${API_KEY}`;
+
+    if (promotionItemInfoId) {
+        url += `&promotion_item_info_id=eq.${promotionItemInfoId}`;
+    }
+
+    console.log(`Fetching nutrition with URL: ${url}`);
+    let response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    return await response.json();
+}
