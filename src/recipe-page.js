@@ -1,13 +1,13 @@
 import { fetchRecipeById, fetchPromotions } from './api-service.js';
 
 // Hämtar recept-ID från URL:en, t.ex. recipes.html?id=1
-function getRecipeIdFromUrl() {
+export function getRecipeIdFromUrl() {
     const params = new URLSearchParams(window.location.search);
     return params.get('id');
 }
 
 // Fyller i bild, titel och beskrivning
-function renderRecipeHeader(recipe) {
+export function renderRecipeHeader(recipe) {
     document.getElementById('recipe-image').src = recipe.image_url || 'https://via.placeholder.com/800x420';
     document.getElementById('recipe-image').alt = recipe.name;
     document.getElementById('recipe-name').textContent = recipe.name;
@@ -15,7 +15,7 @@ function renderRecipeHeader(recipe) {
 }
 
 // Genererar ingredienslistan
-function renderIngredients(ingredients) {
+export function renderIngredients(ingredients) {
     const list = document.getElementById('ingredient-list');
     list.innerHTML = '';
 
@@ -28,7 +28,7 @@ function renderIngredients(ingredients) {
 }
 
 // Genererar instruktioner – delar upp på radbrytningar om de finns
-function renderInstructions(instructions) {
+export function renderInstructions(instructions) {
     const container = document.getElementById('instructions-container');
     container.innerHTML = '';
 
@@ -46,14 +46,14 @@ function renderInstructions(instructions) {
 }
 
 // Genererar erbjudandekort för ingredienser som matchar receptet
-function renderPromotions(promotions, ingredientNames) {
+export function renderPromotions(promotions, ingredientNames) {
     const container = document.getElementById('promotions-container');
     container.innerHTML = '';
 
     // Filtrera bara kampanjer som matchar receptets ingredienser
     const matching = promotions.filter(promo =>
         ingredientNames.some(name =>
-            name.toLowerCase() === promo.ingredient_name?.toLowerCase()
+            name.toLowerCase() === promo.product_name?.toLowerCase()
         )
     );
 
@@ -66,13 +66,13 @@ function renderPromotions(promotions, ingredientNames) {
         const col = document.createElement('div');
         col.className = 'col-md-4 mb-3';
         col.innerHTML = `
-            <div class="card">
-                <div class="card-body">
-                    <span class="offer-badge">−${promo.discount_percentage}%</span>
-                    <h5 class="card-title">${promo.ingredient_name}</h5>
-                    <p class="card-text">${promo.store_name ?? ''}</p>
-                </div>
+        <div class="card">
+            <div class="card-body">
+                <span class="offer-badge">${promo.price} kr</span>
+                <h5 class="card-title">${promo.product_name}</h5>
+                <p class="card-text">${promo.store_info ?? ''}</p>
             </div>
+        </div>
         `;
         container.appendChild(col);
     });
