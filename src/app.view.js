@@ -13,11 +13,12 @@ export function renderPromotionItems(items) {
             <div class="card-body">
                 <h5 class="card-title">${item.name}</h5>
                 <p class="card-text text-muted">${item.description || ""}</p>
-                <span class="badge bg-success">${item.price || ""}</span>
+                <span class="badge bg-success offer-badge">${item.price || ""}:-</span>
             </div>
         </div>
     </div>
 `;
+console.log(items);
   });
 
   container.innerHTML = promotionItem;
