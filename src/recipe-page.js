@@ -79,7 +79,7 @@ export function renderPromotions(promotions, ingredientNames) {
 }
 
 // Huvudfunktion
-async function init() {
+export async function init() {
     const recipeId = getRecipeIdFromUrl();
 
     if (!recipeId) {
