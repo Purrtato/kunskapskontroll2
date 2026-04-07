@@ -29,3 +29,17 @@ async function init() {
 }
 
 init();
+
+const categoryFilter = document.getElementById("categoryFilter");
+const storeFilter = document.getElementById("storeFilter");
+
+categoryFilter.addEventListener("change", handleFilter);
+storeFilter.addEventListener("change", handleFilter);
+
+async function handleFilter() {
+    const category = categoryFilter.value;
+    const store = storeFilter.value;
+
+    const items = await fetchProductInfo(category, store);
+    renderPromotionItems(items);
+}

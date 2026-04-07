@@ -83,12 +83,16 @@ export async function fetchPromotions(id) {
     }
 
     // Fetches product info (name, brand, description, image) from promotion_item_info table.
-export async function fetchProductInfo(promotionItemInfoId) {
+export async function fetchProductInfo(categoryId, storeId) {
     const TABLE_VIEW_URL = 'promotion_item_info';
     let url = `${BASE_URL}${TABLE_VIEW_URL}?apikey=${API_KEY}`;
 
-    if (promotionItemInfoId) {
-        url += `&id=eq.${promotionItemInfoId}`;
+    if (categoryId) {
+        url += `&category_id=eq.${categoryId}`;
+    }
+
+    if (storeId) {
+        url += `&store_id=eq.${storeId}`;
     }
 
     console.log(`Fetching product info with URL: ${url}`);
@@ -112,3 +116,4 @@ export async function fetchNutrition(promotionItemInfoId) {
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     return await response.json();
 }
+
