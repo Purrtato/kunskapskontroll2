@@ -16,3 +16,16 @@ fetchRecipeById(1).then(returnedRecipe => {
 fetchPromotions(61).then(returnedPromotions => {
     console.log('Returned promotions:', returnedPromotions);
 });
+
+
+// promotions.html
+// Fetch promotion items and render them on the page.
+import { fetchProductInfo } from "./api-service.js";
+import { renderPromotionItems } from "./app.view.js";
+
+async function init() {
+    const items = await fetchProductInfo();
+    renderPromotionItems(items);
+}
+
+init();
