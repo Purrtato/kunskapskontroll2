@@ -30,12 +30,14 @@ async function init() {
 
 init();
 
+// Add event listeners to filter dropdowns.
 const categoryFilter = document.getElementById("categoryFilter");
 const storeFilter = document.getElementById("storeFilter");
 
 categoryFilter.addEventListener("change", handleFilter);
 storeFilter.addEventListener("change", handleFilter);
 
+// Handle filter changes and fetch filtered promotion items.
 async function handleFilter() {
     const category = categoryFilter.value;
     const store = storeFilter.value;
