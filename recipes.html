@@ -53,12 +53,9 @@
         <!-- Bild + titel -->
         <div class="row">
             <div class="col-12">
-                <img src="https://images.unsplash.com/photo-1588013273468-315fd88ea34c?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                     class="hero-img mb-4" alt="Pasta Carbonara">
- 
-                <h1>Pasta Carbonara</h1>
-                <p class="text-muted mb-3">En klassisk italiensk rätt</p>
- 
+                <img id="recipe-image" class="hero-img mb-4" alt="Receptbild">
+                <h1 id="recipe-name"></h1>
+                <p id="recipe-description" class="text-muted mb-3"></p>
                 <button type="button" id="favoriteBtn">
                     <span id="heartIcon" class="heart">♡</span> Spara
                 </button>
@@ -69,25 +66,13 @@
  
         <!-- Ingredienser + Instruktioner -->
         <div class="row mt-2">
- 
-            <!-- Ingredienser -->
             <div class="col-md-4 mb-4">
                 <h4 class="mb-3">Ingredienser</h4>
-                <ul class="list-group">
-                    <li class="list-group-item">200g spaghetti</li>
-                    <li class="list-group-item">2 ägg</li>
-                    <li class="list-group-item">100g bacon</li>
-                    <li class="list-group-item">Parmesan</li>
-                </ul>
+                <ul id="ingredient-list" class="list-group"></ul>
             </div>
- 
-            <!-- Instruktioner -->
             <div class="col-md-8">
                 <h4 class="mb-3">Instruktioner</h4>
-                <div class="instruction-step"><strong>1.</strong> Koka pastan enligt anvisningarna.</div>
-                <div class="instruction-step"><strong>2.</strong> Stek bacon tills krispigt.</div>
-                <div class="instruction-step"><strong>3.</strong> Blanda ägg och parmesan.</div>
-                <div class="instruction-step"><strong>4.</strong> Rör ihop allt och servera direkt.</div>
+                <div id="instructions-container"></div>
             </div>
         </div>
  
@@ -96,43 +81,14 @@
         <!-- Erbjudanden -->
         <div class="mt-2">
             <h3 class="mb-4">Erbjudanden</h3>
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <span class="offer-badge">−20%</span>
-                            <h5 class="card-title">Bacon</h5>
-                            <p class="card-text">Gäller denna vecka på ICA</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <span class="offer-badge">−15%</span>
-                            <h5 class="card-title">Parmesan</h5>
-                            <p class="card-text">Coop kampanj</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <span class="offer-badge">−15%</span>
-                            <h5 class="card-title">Bacon</h5>
-                            <p class="card-text">Coop kampanj</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div id="promotions-container" class="row"></div>
         </div>
  
         <hr class="section-divider">
  
-        <!-- Recensioner -->
+        <!-- Recensioner – hårdkodade, inget API -->
         <div class="mt-2">
             <h3 class="mb-4">Recensioner</h3>
- 
             <div class="card mb-3">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
@@ -142,7 +98,6 @@
                     <span class="star-badge">⭐ 5</span>
                 </div>
             </div>
- 
             <div class="card mb-3">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
@@ -155,5 +110,6 @@
         </div>
  
     </div>
+    <script type="module" src="src/recipe-page.js"></script>
 </body>
 </html>
