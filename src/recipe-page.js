@@ -41,7 +41,7 @@ export async function init() {
 
         // Skickar data till View för rendering
         view.renderRecipeHeader(recipe);
-        view.renderIngredients(recipe.ingredients_names);
+        view.renderIngredients(recipe.ingredients_detailed);
         view.renderInstructions(recipe.instructions);
         
         // Renderar kampanjer som matchar ingredienserna i receptet
