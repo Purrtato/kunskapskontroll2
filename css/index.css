@@ -1,72 +1,67 @@
-
-#ingredientList {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.3rem 0.6rem; /* row gap, column gap */
-}
-
-#ingredientList .ingredient-item {
-    margin-bottom: 0.2rem;
+#ingredient-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.6rem; /* row gap, column gap */
 }
 
 /* layout for recipe cards */
 
 .recipe-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
 }
 
 .recipe-cards .card {
-    width: 100%;
-    min-width: 0;
-    margin-bottom: 0;
-    box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  margin-bottom: 0;
+  box-sizing: border-box;
 }
 
 @media (max-width: 1100px) {
-    .recipe-cards {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .recipe-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 770px) {
-    .recipe-cards {
-        grid-template-columns: 1fr;
-    }
+  .recipe-cards {
+    grid-template-columns: 1fr;
+  }
 }
 
 .recipe-card-footer {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
 }
 
-
-.btn-close, .btn-close-white {
-        font-size: 0.5rem;
-        font-weight: 700;
-        color: #fff;
-        text-shadow:
-            0 0 1px #fff,
-            0 0 1px #fff,
-            0 0 1px #fff,
-            0 0 1px #fff;
-        opacity: 1;
+.btn-close,
+.btn-close-white {
+  font-size: 0.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow:
+    0 0 1px #fff,
+    0 0 1px #fff,
+    0 0 1px #fff,
+    0 0 1px #fff;
+  opacity: 1;
 }
 
 /* Bootstrap color overrides */
 
 .text-bg-primary {
-    background-color: #198754 !important;
+  background-color: #198754 !important;
 }
 
 .btn {
-    background-color: #198754 !important;
-    border-color: #198754 !important;
+  background-color: #198754 !important;
+  border-color: #198754 !important;
 }
 
 .btn:hover {
-    background-color: #157347 !important;
-    border-color: #157347 !important;
+  background-color: #157347 !important;
+  border-color: #157347 !important;
 }
