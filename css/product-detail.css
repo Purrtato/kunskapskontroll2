@@ -1,0 +1,103 @@
+/* Product image */
+.product-img {
+  border-radius: 12px;
+  box-shadow: 0 4px 24px var(--text-faded);
+  width: 100%;
+  object-fit: cover;
+  max-height: 380px;
+}
+
+/* Back link */
+.back-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  transition: opacity 0.2s;
+}
+.back-link:hover {
+  opacity: 0.7;
+  color: var(--primary);
+}
+
+/* Price box */
+.price-box {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.price-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  width: 100%;
+  margin-bottom: 2px;
+}
+.price-value {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+.price-original {
+  font-size: 1rem;
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+/* Store info */
+.store-info {
+  font-size: 0.92rem;
+}
+.store-label {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 6px;
+}
+.store-value {
+  color: var(--text);
+}
+
+/* Nutrition table */
+.nutrition-table {
+  width: 100%;
+  border-collapse: collapse;
+  max-width: 480px;
+}
+.nutrition-table tr {
+  border-bottom: 1px solid var(--border);
+}
+.nutrition-table tr:last-child {
+  border-bottom: none;
+}
+.nutrition-table td {
+  padding: 0.6rem 0.5rem;
+  font-size: 0.93rem;
+  color: var(--text);
+}
+.nutrition-table td:first-child {
+  color: var(--muted);
+  font-weight: 400;
+}
+.nutrition-table td:last-child {
+  font-weight: 700;
+  text-align: right;
+}
+.nutrition-table tr.nutrition-highlight td {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Related recipe cards */
+.related-recipe-card {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+.related-recipe-card:hover {
+  color: inherit;
+}

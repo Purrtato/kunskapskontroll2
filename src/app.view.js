@@ -1,109 +1,131 @@
-let ingredientList = document.getElementById('ingredient-list');
-let resultInfoText = document.getElementById('result-info-text');
-let recipeList = document.getElementById('recipe-list');
-let ingredientInput = document.getElementById('ingredient-input');
-let ingredientSuggestions = document.getElementById('ingredient-suggestions');
+// Renders promotion items in the promotions.html page
+export function renderPromotionItems(items) {
+  const container = document.getElementById("promotion-container");
+  container.classList.add("row", "mt-4");
 
-// Renders the recipe cards - function takes an array of recipe objects.
-export function renderRecipes(recipes) {
-  recipeList.innerHTML = '';
-  if (recipes.length === 0) {
-    return;
-  }
+  let promotionItem = "";
 
-  recipes.forEach(recipe => {
-    const card = document.createElement('div');
-    card.className = 'card h-100';
-
-    let recipeImg = document.createElement('img');
-    recipeImg.src = recipe.image_url || 'https://via.placeholder.com/150';
-    recipeImg.className = 'card-img-top';
-    recipeImg.alt = recipe.name;
-
-    card.appendChild(recipeImg);
-
-    const cardBody = document.createElement('div');
-    cardBody.className = 'card-body';
-    const recipeName = document.createElement('h5');
-    recipeName.className = 'recipe-name';
-    recipeName.textContent = capitalizeFirstLetter(recipe.name);
-    const recipeDescription = document.createElement('p');
-    recipeDescription.className = 'recipe-description';
-    recipeDescription.textContent = recipe.description;
-
-    cardBody.appendChild(recipeName);
-    cardBody.appendChild(recipeDescription);
-    card.appendChild(cardBody);
-
-    const cardFooter = document.createElement('div');
-    cardFooter.className = 'card-footer d-flex align-items-center gap-3';
-
-    const matchCount = document.createElement('span');
-    matchCount.className = 'footer-label';
-    matchCount.textContent = `${recipe.matches} matchningar`;
-
-    const offerCount = document.createElement('span');
-    offerCount.className = 'footer-label';
-    offerCount.textContent = `${recipe.offers} erbjudanden`;
-
-    cardFooter.appendChild(matchCount);
-    cardFooter.appendChild(offerCount);
-    card.appendChild(cardFooter);
-
-    recipeList.appendChild(card);
+  items.forEach((item) => {
+    promotionItem += `
+    <div class="col-md-3 mb-3">
+        <div class="card h-100 shadow-sm">
+            <img src="${item.image_url}" class="card-img-top" alt="${item.name}" style="height:150px; object-fit:cover;">
+            <div class="card-body">
+                <h5 class="card-title">${item.name}</h5>
+                <p class="card-text text-muted">${item.description || ""}</p>
+                <span class="badge bg-success offer-badge">${item.price || ""}:-</span>
+            </div>
+        </div>
+    </div>
+`;
+console.log(items);
   });
+
+  container.innerHTML = promotionItem;
 }
 
-// Renders the selected ingredients - function takes an array of ingredient objects and a remove callback function.
-export function renderIngredients(ingredients, onRemove) {
-  ingredientList.innerHTML = '';
-  if (ingredients.length === 0) {
-    return;
-  }
+// Fyller i bild, titel och beskrivning
+export function renderRecipeHeader(recipe) {
+    const img = document.getElementById('recipe-image');
+    const name = document.getElementById('recipe-name');
+    const desc = document.getElementById('recipe-description');
 
-  ingredients.forEach(ingredient => {
-    const ingredientItem = document.createElement('span');
-    ingredientItem.className =
-      'ingredient-item badge text-bg-primary px-3 py-2 rounded-pill d-inline-flex align-items-center';
-    ingredientItem.textContent = capitalizeFirstLetter(ingredient.name);
-
-    const removeButton = document.createElement('button');
-    removeButton.type = 'button';
-    removeButton.className = 'btn-close btn-close-white ms-2';
-    removeButton.setAttribute('aria-label', 'Remove');
-    removeButton.addEventListener('click', () => onRemove(ingredient.id));
-
-    ingredientItem.appendChild(removeButton);
-    ingredientList.appendChild(ingredientItem);
-  });
+    // Använder en placeholder-bild om ingen bild finns i datan
+    if (img) {
+        img.src = recipe.image_url || 'https://via.placeholder.com/800x420';
+        img.alt = recipe.name;
+    }
+    // Fyller i titel och beskrivning om de finns i datan
+    if (name) {
+        name.textContent = recipe.name;
+    }
+    if (desc) {
+        desc.textContent = recipe.description;
+    }
 }
 
-// Renders the result info text above the recipe results, based on the total number of recipes found.
-export function renderResultInfo(totalResults) {
-  if (totalResults === 0) {
-    resultInfoText.textContent =
-      'Inga recept hittades. Prova med andra ingredienser eller kategorier.';
-  } else {
-    resultInfoText.textContent = `Hittade ${totalResults} recept med dina valda ingredienser`;
-  }
+// Genererar ingredienslistan
+export function renderIngredients(ingredients) {
+    const list = document.getElementById('ingredient-list');
+    if (!list) return;
+    list.innerHTML = '';
+// Skapar en listpunkt för varje ingrediens och lägger till den i listan
+    ingredients.forEach(name => {
+        const li = document.createElement('li');
+        li.className = 'list-group-item';
+        li.textContent = name;
+        list.appendChild(li);
+    });
 }
 
-export function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+// Genererar instruktioner
+export function renderInstructions(instructions) {
+    const container = document.getElementById('instructions-container');
+    if (!container) return; // Säkerställer att elementet finns innan vi försöker manipulera det
+    container.innerHTML = '';
+
+    const steps = instructions
+        .split(/(?=\d+\.\s)/) // Dela upp texten i steg baserat på numrering (1. Text, 2. Text, etc.)
+        .map(s => s.trim()) // Ta bort överflödiga mellanslag
+        .filter(s => s.length > 0); // Ta bort tomma steg
+
+    // Om det inte finns några numrerade steg, visa hela instruktionen som en paragraf
+    if (steps.length === 0) {
+        const div = document.createElement('div');
+        div.className = 'instruction-step mb-3';
+        div.textContent = instructions;
+        container.appendChild(div);
+        return;
+    }
+    // Skapa ett element för varje steg och numrera dem
+    steps.forEach((step, index) => {
+        const div = document.createElement('div');
+        div.className = 'instruction-step mb-3 d-flex'; // La till flexbox för layout
+        const stepTextWithoutNumber = step.replace(/^\d+\.\s/, ''); // Ta bort numreringen från texten
+
+        div.innerHTML = `
+            <strong class="me-2">${index + 1}.</strong> 
+            <p class="mb-0">${stepTextWithoutNumber}</p>
+        `;
+        container.appendChild(div);
+    });
 }
 
-// Renders the ingredient suggestions in the datalist element.
-export function renderIngredientSuggestions(suggestions) {
-  ingredientSuggestions.innerHTML = '';
+// Genererar erbjudandekort för ingredienser som matchar receptet
+export function renderRecipePromotions(promotions, ingredientNames) {
+    const container = document.getElementById('promotions-container');
+    if (!container) return;
+    container.innerHTML = '';
 
-  suggestions.forEach(ingredient => {
-    const option = document.createElement('option');
-    option.value = ingredient.name;
-    ingredientSuggestions.appendChild(option);
-  });
-}
-
-export function clearIngredientInputAndSuggestions() {
-  ingredientInput.value = '';
-  ingredientSuggestions.innerHTML = '';
+// Filtrera bara kampanjer som matchar receptets ingredienser
+    const matching = promotions.filter(promo => {
+    const promoName = promo.product_name?.toLowerCase() || "";
+    
+    // Kolla om någon av ingredienserna i receptet matchar kampanjens produktnamn. Gör en "includes"-matchning för att fånga upp relevanta kampanjer, även om namnen inte är exakt lika.
+    return ingredientNames.some(ingName => {
+        const recipeIngName = ingName.toLowerCase();
+        return promoName.includes(recipeIngName) || recipeIngName.includes(promoName);
+    });
+});
+// Om inga matchande kampanjer hittas, visa ett meddelande
+    if (matching.length === 0) {
+        container.innerHTML = '<p class="text-muted">Inga erbjudanden på ingredienserna just nu.</p>';
+        return;
+    }
+    
+// Skapa kort för varje matchande kampanj
+    let html = "";
+    matching.forEach(promo => {
+        html += `
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <span class="badge bg-success mb-2">${promo.price}:-</span>
+                    <h5 class="card-title">${promo.product_name}</h5>
+                    <p class="card-text text-muted small">${promo.store_info ?? ''}</p>
+                </div>
+            </div>
+        </div>`;
+    });
+    container.innerHTML = html;
 }
