@@ -1,125 +1,107 @@
 export class SearchModel {
-    constructor() {
-        // Text search / filters
-        this.searchQuery = '';
-        this.categoryFilter = '';
+  constructor() {
+    // Text search / filters
+    this.searchQuery = '';
+    this.categoryFilter = '';
 
-        // Ingredient handling
-        this.ingredientInput = '';        // current text in the "add ingredient" field
-        this.ingredientSuggestions = [];  // matches returned from the API for the current input
-        this.selectedIngredients = [];   // ingredients the user has added to their search criteria
+    // ingredients the user has added to their search criteria
+    this.selectedIngredients = [];
 
-        // Recipes shown on the page
-        this.recipeResults = [];
-        this.totalRecipeResults = 0;
+    // Recipes shown on the page
+    this.recipeResults = [];
 
-        // Promotions of ingredients
-        this.promotions = []; // Inte helt säker på om jag tänkt rätt här... Men antingen hämtar och cachear vi alla aktuella kampanjer i modellen, eller så hämtar vi bara de som matchar de ingredienser som är i recepten som visas. Första alternativet känns bättre va? Det bör inte bli så mycket data att hantera oavsett. Sen när vi har alla kampanjer i modellen så kan vi enkelt kolla efter matchningar i recepten som visas. Se metoden getMatchingPromotionsForRecipe() nedan.
+    // Promotions - fetch once and store in model
+    this.promotions = [];
+  }
 
+  setSearchQuery(query) {
+    this.searchQuery = query;
+  }
+
+  getSearchQuery() {
+    return this.searchQuery;
+  }
+
+  setCategoryFilter(category) {
+    this.categoryFilter = category;
+  }
+
+  getCategoryFilter() {
+    return this.categoryFilter;
+  }
+
+  addSelectedIngredient(ingredient) {
+    const alreadyAdded = this.selectedIngredients.some(
+      //some() method checks if any ingredient in selectedIngredients has the same id as the one being added, to prevent duplicates.
+      item => item.id === ingredient.id,
+    );
+
+    if (!alreadyAdded) {
+      this.selectedIngredients.push(ingredient);
     }
+  }
 
-    setSearchQuery(query) {
-        this.searchQuery = query;
-    }
+  getSelectedIngredients() {
+    return this.selectedIngredients;
+  }
 
-    getSearchQuery() {
-        return this.searchQuery;
-    }
+  removeSelectedIngredient(ingredientId) {
+    this.selectedIngredients = this.selectedIngredients.filter(
+      item => item.id !== ingredientId,
+    );
+  }
 
-    setCategoryFilter(category) {
-        this.categoryFilter = category;
-    }
+  clearSelectedIngredients() {
+    this.selectedIngredients = [];
+  }
 
-    getCategoryFilter() {
-        return this.categoryFilter;
-    }
+  setRecipeResults(recipes) {
+    this.recipeResults = this.sortRecipesByMatches(recipes);
+  }
 
-    setIngredientInput(value) {
-        this.ingredientInput = value;
-    }
+  getRecipeResults() {
+    return this.recipeResults;
+  }
 
-    getIngredientInput() {
-        return this.ingredientInput;
-    }
+  clearRecipeResults() {
+    this.recipeResults = [];
+  }
 
-    clearIngredientInput() {
-        this.ingredientInput = '';
-    }
+  setPromotions(promotions) {
+    this.promotions = promotions;
+  }
 
-    setIngredientSuggestions(suggestions) {
-        this.ingredientSuggestions = suggestions;
-    }
+  getPromotions() {
+    return this.promotions;
+  }
 
-    getIngredientSuggestions() {
-        return this.ingredientSuggestions;
-    }
+  clearPromotions() {
+    this.promotions = [];
+  }
 
-    clearIngredientSuggestions() {
-        this.ingredientSuggestions = [];
-    }
+  // returns an array of ingredients in the given recipe that have promotions available
+  getMatchingPromotionsForRecipe(recipe) {
+    const promoIng = new Set(this.promotions.map(p => p.ingredient_name));
 
-    addSelectedIngredient(ingredient) {
-        const alreadyAdded = this.selectedIngredients.some( //some() method checks if any ingredient in selectedIngredients has the same id as the one being added, to prevent duplicates.
-            item => item.id === ingredient.id
-        );
+    return recipe.ingredients_names.filter(ingredient =>
+      promoIng.has(ingredient),
+    );
+  }
 
-        if (!alreadyAdded) {
-            this.selectedIngredients.push(ingredient);
-        }
-    }
+  //returns an array of ingredient names that are both in the given recipe and in the user's currently selected ingredients.
+  getNumberOfMatchingIngredientsForRecipe(recipe) {
+    const selectedIng = new Set(this.selectedIngredients.map(ing => ing.name));
 
-    getSelectedIngredients() {
-        return this.selectedIngredients;
-    }
+    return recipe.ingredients_names.filter(ingredient =>
+      selectedIng.has(ingredient),
+    );
+  }
 
-    removeSelectedIngredient(ingredientId) {
-        this.selectedIngredients = this.selectedIngredients.filter(
-            item => item.id !== ingredientId
-        );
-    }
-
-    clearSelectedIngredients() {
-        this.selectedIngredients = [];
-    }
-
-    setRecipeResults(recipes) {
-        this.recipeResults = recipes;
-    }
-
-    getRecipeResults() {
-        return this.recipeResults;
-    }
-
-    setTotalRecipeResults(total) {
-        this.totalRecipeResults = total;
-    }
-
-    getTotalRecipeResults() {
-        return this.totalRecipeResults;
-    }
-
-    clearRecipeResults() {
-        this.recipeResults = [];
-        this.totalRecipeResults = 0;
-    }
-
-    setPromotions(promotions) {
-        this.promotions = promotions;
-    }
-
-    getPromotions() {
-        return this.promotions;
-    }
-
-    clearPromotions() {
-        this.promotions = [];
-    }
-
-    // returns an array of ingredients in the given recipe that have promotions available, based on the current promotions in the model.
-    getMatchingPromotionsForRecipe(recipe) {
-    const promoIds = new Set(this.promotions.map(p => p.ingredientId)); 
-
-    return recipe.ingredients.filter(ing => promoIds.has(ing.id));
-}
-
+  sortRecipesByMatches(recipes) {
+    return recipes.sort((a, b) => {
+      const aMatches = this.getNumberOfMatchingIngredientsForRecipe(a).length;
+      const bMatches = this.getNumberOfMatchingIngredientsForRecipe(b).length;
+      return bMatches - aMatches; // Sort in descending order of matches
+    });
+  }
 }
