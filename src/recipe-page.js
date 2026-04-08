@@ -9,7 +9,7 @@ const model = new SearchModel();
 // Renderar receptets titel, beskrivning och bild
 export function getRecipeIdFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    return params.get('id');
+    return params.get('id') || '4'; // Returnerar '4' som standardvärde om inget ID finns i URL:en
 }
 
 // Huvudfunktionen som initierar sidan, hämtar data och renderar den
