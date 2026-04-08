@@ -18,7 +18,6 @@ export async function fetchIngredients(query) {
   return data;
 }
 
-
 export async function fetchRecipes(
   searchQuery,
   categoryFilter,
@@ -79,38 +78,36 @@ export async function fetchPromotions(id) {
   return data;
 }
 
-    // Fetches product info (name, brand, description, image) from promotion_item_info table.
+// Fetches product info (name, brand, description, image) from promotion_item_info table.
 export async function fetchProductInfo(categoryId, storeId) {
-    const TABLE_VIEW_URL = 'promotion_item_info';
-    let url = `${BASE_URL}${TABLE_VIEW_URL}?apikey=${API_KEY}`;
+  const TABLE_VIEW_URL = 'promotion_item_info';
+  let url = `${BASE_URL}${TABLE_VIEW_URL}?apikey=${API_KEY}`;
 
-    if (categoryId) {
-        url += `&category_id=eq.${categoryId}`;
-    }
+  if (categoryId) {
+    url += `&category_id=eq.${categoryId}`;
+  }
 
-    if (storeId) {
-        url += `&store_id=eq.${storeId}`;
-    }
+  if (storeId) {
+    url += `&store_id=eq.${storeId}`;
+  }
 
-    console.log(`Fetching product info with URL: ${url}`);
-    let response = await fetch(url);
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-    return await response.json();
+  console.log(`Fetching product info with URL: ${url}`);
+  let response = await fetch(url);
+  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+  return await response.json();
 }
-
 
 // Fetches nutrition data for a product from the nutrition table.
 export async function fetchNutrition(promotionItemInfoId) {
-    const TABLE_VIEW_URL = 'nutrition';
-    let url = `${BASE_URL}${TABLE_VIEW_URL}?apikey=${API_KEY}`;
+  const TABLE_VIEW_URL = 'nutrition';
+  let url = `${BASE_URL}${TABLE_VIEW_URL}?apikey=${API_KEY}`;
 
-    if (promotionItemInfoId) {
-        url += `&promotion_item_info_id=eq.${promotionItemInfoId}`;
-    }
+  if (promotionItemInfoId) {
+    url += `&promotion_item_info_id=eq.${promotionItemInfoId}`;
+  }
 
-    console.log(`Fetching nutrition with URL: ${url}`);
-    let response = await fetch(url);
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-    return await response.json();
+  console.log(`Fetching nutrition with URL: ${url}`);
+  let response = await fetch(url);
+  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+  return await response.json();
 }
-

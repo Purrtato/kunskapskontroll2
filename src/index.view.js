@@ -5,7 +5,7 @@ let ingredientInput = document.getElementById('ingredient-input');
 let ingredientSuggestions = document.getElementById('ingredient-suggestions');
 
 // Renders the recipe cards - function takes an array of recipe objects.
-export function renderRecipes(recipes) {
+export function renderRecipes(recipes, onCardClick) {
   recipeList.innerHTML = '';
   if (recipes.length === 0) {
     return;
@@ -14,6 +14,9 @@ export function renderRecipes(recipes) {
   recipes.forEach(recipe => {
     const card = document.createElement('div');
     card.className = 'card h-100';
+    card.setAttribute('recipe-id', recipe.id);
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', () => onCardClick(recipe.id));
 
     let recipeImg = document.createElement('img');
     recipeImg.src = recipe.image_url || 'https://via.placeholder.com/150';

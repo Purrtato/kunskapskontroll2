@@ -19,7 +19,6 @@ let form = document.getElementById('search-form');
 let ingredientInput = document.getElementById('ingredient-input');
 let categorySelect = document.getElementById('category-filter');
 
-
 // fetch promotions when the app loads and store in model
 fetchPromotions().then(promotions => {
   model.setPromotions(promotions);
@@ -97,7 +96,7 @@ async function loadRecipes() {
 
   // store the fetched recipes in the model and finally renders them
   model.setRecipeResults(recipes);
-  renderRecipes(model.getRecipeResults());
+  renderRecipes(model.getRecipeResults(), handleCardClick);
   renderResultInfo(model.getRecipeResults().length);
 }
 
@@ -106,4 +105,8 @@ async function handleRemoveIngredient(ingredientId) {
   model.removeSelectedIngredient(ingredientId);
   renderIngredients(model.getSelectedIngredients(), handleRemoveIngredient);
   await loadRecipes();
+}
+// Card click - called from each recipe card via the renderRecipes callback, navigates to the recipe detail page for the clicked recipe.
+function handleCardClick(recipeId) {
+  window.location.href = `recipes.html?id=${recipeId}`;
 }
