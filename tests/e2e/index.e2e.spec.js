@@ -23,7 +23,8 @@ test('shows the search-form on index.html. Allows and renders adding and removin
     hasText: 'Mjölk',
   });
 
-  const selectedIngredients = selectedIngredientsContainer.locator('.ingredient-item');
+  const selectedIngredients =
+    selectedIngredientsContainer.locator('.ingredient-item');
 
   await expect(milk).toBeVisible();
   await expect(selectedIngredients).toHaveCount(1);
