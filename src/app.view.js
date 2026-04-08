@@ -8,14 +8,16 @@ export function renderPromotionItems(items) {
   items.forEach((item) => {
     promotionItem += `
     <div class="col-md-3 mb-3">
-        <div class="card h-100 shadow-sm">
-            <img src="${item.image_url}" class="card-img-top" alt="${item.name}" style="height:150px; object-fit:cover;">
-            <div class="card-body">
-                <h5 class="card-title">${item.name}</h5>
-                <p class="card-text text-muted">${item.description || ""}</p>
-                <span class="badge bg-success offer-badge">${item.price || ""}:-</span>
+        <a href="product-detail.html?id=${item.id}" class="text-decoration-none">
+            <div class="card h-100 shadow-sm">
+                <img src="${item.image_url}" class="card-img-top" alt="${item.name}" style="height:150px; object-fit:cover;">
+                <div class="card-body">
+                    <h5 class="card-title">${item.name}</h5>
+                    <p class="card-text text-muted">${item.description || ""}</p>
+                    <span class="badge bg-success offer-badge">${item.price || ""}:-</span>
+                </div>
             </div>
-        </div>
+        </a>
     </div>
 `;
 console.log(items);
