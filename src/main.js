@@ -10,7 +10,7 @@ import {
   renderResultInfo,
   renderIngredientSuggestions,
   clearIngredientInputAndSuggestions,
-} from './app.view.js';
+} from './index.view.js';
 
 const model = new SearchModel();
 
