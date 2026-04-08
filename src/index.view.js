@@ -43,11 +43,11 @@ export function renderRecipes(recipes, onCardClick) {
 
     const matchCount = document.createElement('span');
     matchCount.className = 'footer-label';
-    matchCount.textContent = `${recipe.matches} matchningar`;
+    matchCount.textContent = `${recipe.matches} ${recipe.matches === 1 ? 'matchning' : 'matchningar'}`;
 
     const offerCount = document.createElement('span');
     offerCount.className = 'footer-label';
-    offerCount.textContent = `${recipe.offers} erbjudanden`;
+    offerCount.textContent = `${recipe.offers} ${recipe.offers === 1 ? 'erbjudande' : 'erbjudanden'}`;
 
     cardFooter.appendChild(matchCount);
     cardFooter.appendChild(offerCount);
