@@ -78,16 +78,3 @@ export async function fetchPromotions(id) {
   const data = await response.json();
   return data;
 }
-
-// DECIDED TO PUT THE CATEGORIES IN THE HTML AS A STATIC SELECT ELEMENT INSTEAD OF FETCHING THEM - Keep this here in case we want to add it later.
-
-// export async function fetchRecipeCategories() {
-//     const TABLE_VIEW_URL = 'recipe_categories';
-//     let url = `${BASE_URL}${TABLE_VIEW_URL}?apikey=${API_KEY}`;
-
-//     console.log(`Fetching recipe categories with URL: ${url}`);
-//     let response = await fetch(url);
-//     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-//     const data = await response.json();
-//     return data;
-// }
