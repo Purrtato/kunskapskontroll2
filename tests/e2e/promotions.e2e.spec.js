@@ -1,11 +1,10 @@
 import { test, expect } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/promotions.html");
 });
 
 test("renders promotions and applies filters", async ({ page }) => {
-  await page.goto("/promotions.html");
 
   const promotionCards = page.locator("#promotion-container .card");
   await expect(promotionCards).toHaveCount(16);
