@@ -1,5 +1,5 @@
 import { describe, test, expect, beforeEach, vi } from 'vitest';
-import { init } from '../../src/recipe-page.js'; // justera sökvägen om den skiljer sig
+import { init } from '../../src/recipe-page.js'; 
  
 // Mockar API-anropen så inga riktiga nätverksanrop görs
 vi.mock('../../src/api-service.js', () => ({
