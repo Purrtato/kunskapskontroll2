@@ -1,10 +1,6 @@
 // Denna fil hanterar logiken för receptsidan, inklusive att hämta data från API:et och skicka den till View för rendering
 import { fetchRecipeById, fetchPromotions } from './api-service.js';
-import { SearchModel } from './app.model.js';
 import * as view from './app.view.js';
-
-// Skapa en instans av modellen för att hålla data
-const model = new SearchModel();
 
 // Renderar receptets titel, beskrivning och bild
 export function getRecipeIdFromUrl() {
@@ -35,17 +31,13 @@ export async function init() {
             return;
         }
 
-        // Sparar data i modellen
-        model.setRecipeResults([recipe]);
-        model.setPromotions(promotionsData);
-
         // Skickar data till View för rendering
         view.renderRecipeHeader(recipe);
         view.renderIngredients(recipe.ingredients_detailed);
         view.renderInstructions(recipe.instructions);
         
         // Renderar kampanjer som matchar ingredienserna i receptet
-        view.renderRecipePromotions(model.getPromotions(), recipe.ingredients_names);
+        view.renderRecipePromotions(promotionsData, recipe.ingredients_names);
 
     } catch (error) {
         console.error('Ett fel uppstod', error);
