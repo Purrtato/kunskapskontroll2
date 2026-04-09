@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/promotions.html");
+  await page.goto("https://kunskapskontroll2.vercel.app/promotions.html");
 });
 
 test("renders promotions and applies filters", async ({ page }) => {
