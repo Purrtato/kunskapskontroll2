@@ -6,9 +6,11 @@ export function renderPromotionItems(items) {
   let promotionItem = "";
 
   items.forEach((item) => {
+    const detailId = item.correctDetailId ?? item.id;
+
     promotionItem += `
     <div class="col-md-3 mb-3">
-        <a href="product-detail.html?id=${item.id}" class="text-decoration-none">
+        <a href="product-detail.html?id=${detailId}" class="text-decoration-none">
             <div class="card h-100 shadow-sm">
                 <img src="${item.image_url}" class="card-img-top" alt="${item.name}" style="height:150px; object-fit:cover;">
                 <div class="card-body">
