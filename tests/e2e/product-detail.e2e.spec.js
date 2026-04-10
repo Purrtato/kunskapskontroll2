@@ -4,7 +4,7 @@
 
 import { test, expect } from "@playwright/test";
 
-const BASE_URL = "http://localhost:4173";
+const BASE_URL = "https://kunskapskontroll2.vercel.app";
 
 test.describe("Product detail page", () => {
   test("shows error state when no id is provided", async ({ page }) => {
@@ -30,8 +30,8 @@ test.describe("Product detail page", () => {
     const productContent = page.locator("#productContent");
     await expect(productContent).toBeVisible({ timeout: 5000 });
 
-    await expect(page.locator("#productName")).toHaveText("arla mellanmjölk");
-    await expect(page.locator("#storeName")).toHaveText("Coop");
+    await expect(page.locator("#productName")).toHaveText("mjölk");
+    await expect(page.locator("#storeName")).toHaveText("ica");
     await expect(page.locator("#productPrice")).toHaveText("12 kr");
   });
 
